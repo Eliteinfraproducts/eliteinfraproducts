@@ -1,0 +1,1503 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elite Infra Products | Premium Doors & Pre-Hung Solutions</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        wood: {
+                            50: '#fdfbf7',
+                            100: '#f7f2e8',
+                            200: '#eee2cc',
+                            300: '#e1cca8',
+                            400: '#cbb07a',
+                            500: '#b89456',
+                            600: '#9b7641',
+                            700: '#7e5a34',
+                            800: '#67472f',
+                            900: '#543b2a',
+                            950: '#2d1e15',
+                        },
+                        gold: {
+                            300: '#f6e08b',
+                            400: '#f2cd51',
+                            500: '#d4af37',
+                            600: '#aa8214',
+                        },
+                        darkness: '#120f0d'
+                    },
+                    fontFamily: {
+                        serif: ['Cinzel', 'serif'],
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        :root {
+            --page-bg-tone: #ffffff;
+            --page-text-color: #1f2937;
+        }
+        body {
+            background-color: var(--page-bg-tone);
+            color: var(--page-text-color);
+            transition: background-color 0.4s ease, color 0.4s ease;
+        }
+        .wood-pattern {
+            background-color: var(--page-bg-tone);
+            background-image: radial-gradient(#2d1e15 0.75px, transparent 0.75px), radial-gradient(#2d1e15 0.75px, var(--page-bg-tone) 0.75px);
+            background-size: 30px 30px;
+            background-position: 0 0,15px 15px;
+        }
+        .wood-texture-overlay {
+            background: linear-gradient(135deg, rgba(255,255,255,0.85) 0%, rgba(243,244,246,0.95) 100%);
+        }
+        .dark-mode .wood-texture-overlay {
+            background: linear-gradient(135deg, rgba(45,30,21,0.85) 0%, rgba(18,15,13,0.95) 100%);
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(184, 148, 86, 0.25);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+        }
+        .dark-mode .glass-card {
+            background: rgba(30, 24, 20, 0.6);
+            border: 1px solid rgba(184, 148, 86, 0.15);
+        }
+        .glass-card-hover:hover {
+            border-color: rgba(212, 175, 55, 0.5);
+            box-shadow: 0 10px 30px -10px rgba(184, 148, 86, 0.25);
+        }
+        .door-preview-container {
+            perspective: 1000px;
+        }
+        .door-frame-preview {
+            transition: all 0.5s ease;
+        }
+        .door-leaf-preview {
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-origin: left center;
+        }
+        .slider-img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 0.8s ease-in-out;
+        }
+        .slider-img.active {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="font-sans antialiased selection:bg-gold-500 selection:text-black">
+
+    <!-- NAVIGATION BAR -->
+    <nav class="fixed top-0 left-0 w-full z-40 bg-white/90 dark:bg-darkness/90 backdrop-blur-md border-b border-wood-800/20 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <a href="#" class="flex items-center space-x-3 group">
+                    <div id="navLogoContainer" class="w-12 h-12 rounded bg-wood-900/10 border border-gold-500/30 flex items-center justify-center p-1 overflow-hidden">
+                        <img id="siteLogo" src="https://via.placeholder.com/150/2d1e15/d4af37?text=ELITE" alt="Elite Infra Logo" class="max-h-full object-contain">
+                    </div>
+                    <div>
+                        <span class="font-serif text-xl font-bold tracking-wider text-stone-900 dark:text-stone-100 block group-hover:text-gold-600 transition" id="navBrandName">ELITE INFRA</span>
+                        <span class="text-[9px] tracking-widest text-wood-600 uppercase font-medium block">Products & Doors</span>
+                    </div>
+                </a>
+
+                <!-- Desktop Nav Links -->
+                <div class="hidden md:flex items-center space-x-8 text-sm font-medium">
+                    <a href="#about" class="text-stone-700 hover:text-gold-600 transition">About Us</a>
+                    <a href="#customizer" class="text-gold-600 font-semibold flex items-center space-x-1 hover:text-gold-500 transition">
+                        <i class="fa-solid fa-wand-magic-sparkles text-xs"></i>
+                        <span>3D Customizer</span>
+                    </a>
+                    <a href="#products" class="text-stone-700 hover:text-gold-600 transition">Products & Woods</a>
+                    <a href="#factory" class="text-stone-700 hover:text-gold-600 transition">Factory & Tech</a>
+                    <a href="#clients" class="text-stone-700 hover:text-gold-600 transition">Clients</a>
+                    <a href="#contact" class="text-stone-700 hover:text-gold-600 transition">Contact</a>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="hidden md:flex items-center space-x-4">
+                    <button onclick="openLoginModal()" class="text-stone-600 hover:text-gold-600 p-2 text-sm transition" title="Admin Control Panel">
+                        <i class="fa-solid fa-user-gear text-lg"></i>
+                    </button>
+                    <a id="navWhatsappBtn" href="https://wa.me/919100009781?text=Hi%20Elite%20Infra,%20I%20would%20like%20to%20inquire%20about%20your%20doors." target="_blank" class="bg-gradient-to-r from-wood-600 to-gold-600 hover:from-wood-500 hover:to-gold-500 text-stone-900 font-semibold px-5 py-2.5 rounded-md text-sm shadow-lg shadow-gold-600/10 transition transform hover:-translate-y-0.5 flex items-center space-x-2">
+                        <i class="fa-brands fa-whatsapp text-lg"></i>
+                        <span>WhatsApp Us</span>
+                    </a>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center space-x-2">
+                    <button onclick="openLoginModal()" class="text-stone-600 hover:text-gold-600 p-2 text-lg">
+                        <i class="fa-solid fa-user-gear"></i>
+                    </button>
+                    <button onclick="toggleMobileMenu()" class="text-stone-700 p-2 text-xl focus:outline-none">
+                        <i class="fa-solid fa-bars" id="mobileMenuIcon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobileMenu" class="hidden md:hidden bg-white/95 dark:bg-wood-950/95 border-b border-wood-800/20 px-4 pt-2 pb-6 space-y-3">
+            <a href="#about" onclick="toggleMobileMenu()" class="block text-stone-800 hover:text-gold-600 py-2">About Us</a>
+            <a href="#customizer" onclick="toggleMobileMenu()" class="block text-gold-600 font-semibold py-2">Interactive 3D Customizer</a>
+            <a href="#products" onclick="toggleMobileMenu()" class="block text-stone-800 hover:text-gold-600 py-2">Products & Woods</a>
+            <a href="#factory" onclick="toggleMobileMenu()" class="block text-stone-800 hover:text-gold-600 py-2">Factory & Quality</a>
+            <a href="#clients" onclick="toggleMobileMenu()" class="block text-stone-800 hover:text-gold-600 py-2">B2B Clients</a>
+            <a href="#contact" onclick="toggleMobileMenu()" class="block text-stone-800 hover:text-gold-600 py-2">Contact</a>
+            <a id="mobileWhatsappBtn" href="https://wa.me/919100009781" target="_blank" class="w-full bg-gold-500 text-stone-900 font-bold py-3 rounded text-center block shadow-md">
+                <i class="fa-brands fa-whatsapp text-lg mr-2"></i> WhatsApp Inquiry
+            </a>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="relative pt-32 pb-24 md:pt-40 md:pb-36 overflow-hidden wood-pattern">
+        <div class="absolute inset-0 wood-texture-overlay"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid md:grid-cols-12 gap-12 items-center">
+                <div class="md:col-span-7 space-y-6 text-center md:text-left">
+                    <div class="inline-flex items-center space-x-2 px-3 py-1.5 rounded-full bg-gold-500/10 border border-gold-500/30 text-gold-600 text-xs font-semibold tracking-wider uppercase">
+                        <i class="fa-solid fa-award"></i>
+                        <span id="heroSubHeadline">Hyderabad's Premier B2B Door Manufacturer</span>
+                    </div>
+                    <h1 id="heroMainTitle" class="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold text-stone-900 leading-tight">
+                        Architectural Precision. <br>
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-wood-700 via-gold-600 to-wood-500">Timeless Timber Craft.</span>
+                    </h1>
+                    <p id="heroTagline" class="text-stone-700 text-base md:text-lg font-light leading-relaxed max-w-2xl">
+                        A legacy of timber expertise since 1997. Delivering engineered pre-hung door sets, teak carved shutters, and architectural veneers for Hyderabad’s prestigious residential complexes and high-rises.
+                    </p>
+                    <div class="pt-4 flex flex-col sm:flex-row items-center justify-center md:justify-start gap-4">
+                        <a href="#customizer" class="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-gold-500 to-wood-500 text-stone-950 font-bold rounded-lg shadow-xl shadow-gold-500/10 hover:brightness-110 transition flex items-center justify-center space-x-3">
+                            <i class="fa-solid fa-compass-drafting text-lg"></i>
+                            <span>Customize Your Door</span>
+                        </a>
+                        <a href="#clients" class="w-full sm:w-auto px-8 py-4 glass-card hover:bg-wood-100 text-stone-800 font-semibold rounded-lg border border-wood-300 transition flex items-center justify-center space-x-2">
+                            <span>Our B2B Partners</span>
+                            <i class="fa-solid fa-arrow-right text-sm"></i>
+                        </a>
+                    </div>
+                    
+                    <!-- Stats Grid -->
+                    <div class="pt-8 grid grid-cols-3 gap-4 border-t border-wood-300/60 mt-8">
+                        <div>
+                            <p class="font-serif text-2xl md:text-3xl font-bold text-gold-600">3,000+</p>
+                            <p class="text-xs text-stone-600 mt-1 uppercase tracking-wider">Monthly Capacity</p>
+                        </div>
+                        <div>
+                            <p class="font-serif text-2xl md:text-3xl font-bold text-gold-600">60+</p>
+                            <p class="text-xs text-stone-600 mt-1 uppercase tracking-wider">Major Developers</p>
+                        </div>
+                        <div>
+                            <p class="font-serif text-2xl md:text-3xl font-bold text-gold-600">1997</p>
+                            <p class="text-xs text-stone-600 mt-1 uppercase tracking-wider">Industry Legacy</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hero Graphic Showcase -->
+                <div class="md:col-span-5 flex justify-center">
+                    <div class="relative w-full max-w-md p-6 glass-card rounded-2xl border border-gold-500/30 shadow-2xl overflow-hidden group" id="heroSlideshowContainer">
+                        <div class="relative w-full h-80 rounded-lg overflow-hidden shadow-md" id="heroSlideshow"></div>
+
+                        <button onclick="manualSlide('hero', -1)" class="absolute left-3 top-[42%] -translate-y-1/2 w-9 h-9 rounded-full bg-black/50 text-white flex items-center justify-center hover:bg-gold-500 hover:text-stone-950 transition opacity-0 group-hover:opacity-100 z-30 shadow">
+                            <i class="fa-solid fa-chevron-left text-xs"></i>
+                        </button>
+                        <button onclick="manualSlide('hero', 1)" class="absolute right-3 top-[42%] -translate-y-1/2 w-9 h-9 rounded-full bg-black/50 text-white flex items-center justify-center hover:bg-gold-500 hover:text-stone-950 transition opacity-0 group-hover:opacity-100 z-30 shadow">
+                            <i class="fa-solid fa-chevron-right text-xs"></i>
+                        </button>
+
+                        <div class="mt-4 space-y-2 relative z-20">
+                            <h3 class="font-serif text-lg font-bold text-stone-900">Factory Pre-Hung Door Sets</h3>
+                            <p class="text-xs text-stone-600 leading-relaxed">
+                                Fully integrated frame and door shutter units. Zero site adjustments, pre-finished elegance, saving builders critical time and labor costs.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT COMPANY & HERITAGE SECTION -->
+    <section id="about" class="py-20 border-t border-wood-200 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <div id="aboutBadgeContainer" class="inline-block px-3 py-1 bg-wood-100 border border-wood-300/50 rounded-full text-gold-600 text-xs font-semibold uppercase tracking-widest mb-4">
+                        <span id="aboutBadgeText">Our Legacy & Vision</span>
+                    </div>
+                    <h2 id="aboutMainTitle" class="font-serif text-3xl md:text-4xl font-bold text-stone-900 mb-6">
+                        From Aruna Timbers to <br><span class="text-gold-600">Elite Infra Products</span>
+                    </h2>
+                    <div id="aboutTextContent" class="space-y-4 text-stone-700 font-light text-sm md:text-base leading-relaxed">
+                        <p>
+                            Starting our journey in reputed timber units back in 1997, our foundational expertise inspired the launch of <strong>Aruna Timbers in 2012</strong>, specializing in sawn sizes, door frames, teak panels, and carved door shutters.
+                        </p>
+                        <p>
+                            Building upon decades of trust, <strong>Elite Infra Products</strong> was established in 2022 as an exclusive, state-of-the-art manufacturing facility in Sultanpur, Hyderabad. Spanning advanced automated CNC machinery and precision seasoning technology, our plant produces over 3,000 custom-designed door sets each month.
+                        </p>
+                        <p>
+                            We partner directly with leading builders and infrastructure firms across Telangana, supplying precision-engineered solutions that combine structural longevity with architectural splendor.
+                        </p>
+                    </div>
+
+                    <!-- Vision Checklist -->
+                    <div class="grid grid-cols-2 gap-4 mt-8 pt-6 border-t border-wood-200">
+                        <div class="flex items-start space-x-3">
+                            <i class="fa-solid fa-circle-check text-gold-600 mt-1 text-sm"></i>
+                            <div>
+                                <h4 class="text-sm font-semibold text-stone-900">Market-Driven Innovation</h4>
+                                <p class="text-xs text-stone-600">Custom designs tailored to contemporary architectural needs.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <i class="fa-solid fa-circle-check text-gold-600 mt-1 text-sm"></i>
+                            <div>
+                                <h4 class="text-sm font-semibold text-stone-900">Uncompromised Quality</h4>
+                                <p class="text-xs text-stone-600">Strict quality control with kiln-seasoned dimensional stability.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Factory Capability Visual -->
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="space-y-4">
+                        <div class="glass-card p-4 rounded-xl border border-wood-300/40">
+                            <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=500&q=80" alt="Precision Wood Manufacturing" class="rounded-lg h-48 w-full object-cover mb-3">
+                            <h4 class="font-serif text-sm font-bold text-gold-600">Kiln Seasoning & Treatment</h4>
+                            <p class="text-xs text-stone-600 mt-1">Guaranteed moisture control to eliminate expansion, warpage, and termite infestation.</p>
+                        </div>
+                    </div>
+                    <div class="space-y-4 pt-6">
+                        <div class="glass-card p-4 rounded-xl border border-wood-300/40">
+                            <img src="https://images.unsplash.com/photo-1541888946425-d0fbb186a5b3?auto=format&fit=crop&w=500&q=80" alt="High Scale Production" class="rounded-lg h-48 w-full object-cover mb-3">
+                            <h4 class="font-serif text-sm font-bold text-gold-600">3000 Sets Monthly Capacity</h4>
+                            <p class="text-xs text-stone-600 mt-1">High-volume automated production lines for large residential projects.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- INTERACTIVE DOOR CUSTOMIZER SECTION -->
+    <section id="customizer" class="py-20 wood-pattern relative border-t border-wood-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <span class="px-3 py-1 bg-gold-500/10 border border-gold-500/30 text-gold-600 text-xs font-semibold rounded-full uppercase tracking-widest">
+                    3D Visual Tool
+                </span>
+                <h2 class="font-serif text-3xl md:text-4xl font-bold text-stone-900 mt-3">Interactive Door Customizer</h2>
+                <p class="text-stone-600 text-sm md:text-base mt-2">Design your ideal door configuration in real-time. Choose timber frame materials, door styles, finishes, quantity for bulk orders, and hardware accessories.</p>
+            </div>
+
+            <div class="grid lg:grid-cols-12 gap-8 items-start">
+                <!-- Customizer Controls (Left) -->
+                <div class="lg:col-span-5 glass-card p-6 rounded-2xl border border-wood-300 space-y-6">
+                    <h3 class="font-serif text-xl font-bold text-gold-600 border-b border-wood-200 pb-3 flex items-center justify-between">
+                        <span>Configuration Studio</span>
+                        <i class="fa-solid fa-sliders text-sm text-stone-500"></i>
+                    </h3>
+
+                    <div>
+                        <label class="block text-xs font-bold text-stone-700 uppercase tracking-wider mb-2">1. Shutter Style & Category</label>
+                        <select id="custShutterType" onchange="updateDoorPreview()" class="w-full bg-white border border-wood-300 rounded-lg px-3 py-2.5 text-stone-800 text-sm focus:border-gold-500 focus:outline-none">
+                            <option value="teak-carved">Teak Wood - Carved / Royal Motif</option>
+                            <option value="teak-3d">Teak Wood - 3D Modern Geometric</option>
+                            <option value="teak-pooja">Teak Wood - Pooja Door with Bells</option>
+                            <option value="veneered-walnut">Designed Veneer - Natural Walnut</option>
+                            <option value="veneered-oak">Designed Veneer - White Oak</option>
+                            <option value="hdf-panel">HDF Skin - 6 Panel Classic</option>
+                            <option value="laminated-groove">Laminated - Modern Grooved Finish</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-stone-700 uppercase tracking-wider mb-2">2. Frame Wood Material</label>
+                        <select id="custFrameWood" onchange="updateDoorPreview()" class="w-full bg-white border border-wood-300 rounded-lg px-3 py-2.5 text-stone-800 text-sm focus:border-gold-500 focus:outline-none">
+                            <option value="teak">Premium Imported Teak</option>
+                            <option value="meranti">Red Meranti</option>
+                            <option value="sal">Malaysian Sal</option>
+                            <option value="engineered">Engineered Anti-Warp Frame</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-stone-700 uppercase tracking-wider mb-2">3. Architectural Hardware</label>
+                        <div class="grid grid-cols-3 gap-2">
+                            <button type="button" onclick="setHardware('brass')" class="hw-btn border border-gold-500/50 bg-wood-100 text-stone-800 py-2 rounded text-xs font-medium text-center hover:bg-gold-500 hover:text-stone-950 transition active">
+                                Antique Brass
+                            </button>
+                            <button type="button" onclick="setHardware('chrome')" class="hw-btn border border-wood-300 bg-wood-100 text-stone-800 py-2 rounded text-xs font-medium text-center hover:bg-gold-500 hover:text-stone-950 transition">
+                                Satin Chrome
+                            </button>
+                            <button type="button" onclick="setHardware('black')" class="hw-btn border border-wood-300 bg-wood-100 text-stone-800 py-2 rounded text-xs font-medium text-center hover:bg-gold-500 hover:text-stone-950 transition">
+                                Matte Black
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="p-3 bg-gold-500/10 border border-gold-500/30 rounded-xl">
+                        <div class="flex justify-between items-center mb-1">
+                            <label class="block text-xs font-bold text-stone-800 uppercase tracking-wider">4. Required Quantity (Bulk Orders Only)</label>
+                            <span class="text-[10px] bg-gold-500 text-stone-950 px-2 py-0.5 rounded font-bold">B2B Bulk</span>
+                        </div>
+                        <p class="text-[11px] text-stone-600 mb-2">We strictly cater to bulk projects & developer requirements.</p>
+                        <div class="grid grid-cols-2 gap-2">
+                            <div>
+                                <select id="custBulkQuantity" onchange="updateDoorPreview()" class="w-full bg-white border border-wood-300 rounded-lg px-2.5 py-2 text-stone-800 text-xs focus:border-gold-500 focus:outline-none font-semibold">
+                                    <option value="10-50 Units">10 - 50 Doors</option>
+                                    <option value="50-100 Units" selected>50 - 100 Doors</option>
+                                    <option value="100-500 Units">100 - 500 Doors</option>
+                                    <option value="500+ Units">500+ Doors (Mega Project)</option>
+                                    <option value="custom">Custom Quantity...</option>
+                                </select>
+                            </div>
+                            <div>
+                                <input type="number" id="custCustomQty" placeholder="Exact Qty (Min 10)" min="10" oninput="updateDoorPreview()" class="w-full bg-white border border-wood-300 rounded-lg px-2.5 py-2 text-stone-800 text-xs focus:border-gold-500 focus:outline-none">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="flex justify-between items-center mb-2">
+                            <label class="text-xs font-bold text-stone-700 uppercase tracking-wider">5. Interactive Door Swing</label>
+                            <span id="swingAngleLabel" class="text-xs text-gold-600 font-mono">Closed (0°)</span>
+                        </div>
+                        <input type="range" id="doorSwingSlider" min="0" max="110" value="0" oninput="swingDoor(this.value)" class="w-full accent-gold-500 bg-wood-200 rounded h-2">
+                    </div>
+
+                    <div class="pt-4 border-t border-wood-200 flex gap-3">
+                        <button onclick="requestCustomizerQuote()" class="flex-1 bg-gradient-to-r from-gold-500 to-wood-500 hover:brightness-110 text-stone-950 font-bold py-3 rounded-lg text-sm shadow-md transition flex items-center justify-center space-x-2">
+                            <i class="fa-brands fa-whatsapp text-lg"></i>
+                            <span>Get Bulk Estimate via WhatsApp</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Customizer Preview Visual Render (Right) -->
+                <div class="lg:col-span-7 flex flex-col items-center justify-center glass-card p-8 rounded-2xl border border-wood-300 min-h-[480px]">
+                    <div class="door-preview-container relative w-64 h-[400px] sm:w-72 sm:h-[440px] flex items-center justify-center">
+                        <div id="previewFrame" class="door-frame-preview absolute inset-0 border-[16px] rounded-t-lg shadow-2xl transition-all duration-300 border-[#67472f] bg-stone-900">
+                            <div class="w-full h-full bg-gradient-to-b from-stone-100 to-stone-200 flex items-center justify-center overflow-hidden relative">
+                                <span class="text-stone-400 font-serif text-xs uppercase tracking-widest pointer-events-none">Interior Wall View</span>
+
+                                <div id="previewLeaf" class="door-leaf-preview absolute inset-0 w-full h-full shadow-2xl flex flex-col justify-between p-4 border-r-2 border-stone-950/40 bg-[#7e5a34] text-stone-200">
+                                    <div id="previewPattern" class="w-full h-full border-2 border-gold-500/20 rounded p-3 flex flex-col justify-between relative overflow-hidden">
+                                        <div id="topPanelDesign" class="w-full h-36 border border-gold-500/30 rounded flex items-center justify-center bg-black/10">
+                                            <i id="panelIcon" class="fa-solid fa-crown text-3xl text-gold-400/40"></i>
+                                        </div>
+                                        <div id="bottomPanelDesign" class="w-full h-36 border border-gold-500/30 rounded flex items-center justify-center bg-black/10">
+                                            <div class="w-3/4 h-3/4 border border-gold-500/20 rounded"></div>
+                                        </div>
+                                        <div id="previewHandle" class="absolute right-3 top-1/2 -translate-y-1/2 flex items-center space-x-1">
+                                            <div id="handleColor" class="w-3 h-12 bg-gold-400 rounded-sm shadow-lg border border-black/50"></div>
+                                            <div id="keyholeColor" class="w-2 h-2 rounded-full bg-stone-950"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-6 text-center bg-wood-100 px-4 py-2.5 rounded-lg border border-wood-300 text-xs text-stone-700 max-w-lg">
+                        <span id="specSummary">Selected: Teak Wood Carved Door + Imported Teak Frame (Antique Brass Finish) | Quantity: 50-100 Doors</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRODUCTS & MATERIAL SPECIFICATIONS SECTION -->
+    <section id="products" class="py-20 border-t border-wood-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="px-3 py-1 bg-wood-100 border border-wood-300 text-gold-600 text-xs font-semibold rounded-full uppercase tracking-widest">
+                    Craftsmanship Portfolio
+                </span>
+                <h2 class="font-serif text-3xl md:text-4xl font-bold text-stone-900 mt-3">Products & Timber Categories</h2>
+                <p class="text-stone-600 text-sm md:text-base mt-2">Comprehensive options for main entrances, interior rooms, worship spaces, and commercial infrastructure.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- 1. Door Frames Gallery Card -->
+                <div class="glass-card rounded-2xl p-6 glass-card-hover transition border border-wood-300 flex flex-col justify-between group">
+                    <div>
+                        <div class="relative w-full h-52 rounded-xl overflow-hidden mb-4 shadow-md bg-stone-900" id="prodGallery1Container">
+                            <div class="relative w-full h-full" id="prodGallery1"></div>
+                            <button onclick="manualSlide('prod1', -1)" class="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 text-white flex items-center justify-center hover:bg-gold-500 hover:text-stone-950 transition opacity-0 group-hover:opacity-100 z-30 shadow">
+                                <i class="fa-solid fa-chevron-left text-xs"></i>
+                            </button>
+                            <button onclick="manualSlide('prod1', 1)" class="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 text-white flex items-center justify-center hover:bg-gold-500 hover:text-stone-950 transition opacity-0 group-hover:opacity-100 z-30 shadow">
+                                <i class="fa-solid fa-chevron-right text-xs"></i>
+                            </button>
+                        </div>
+
+                        <h3 id="prodTitle1" class="font-serif text-xl font-bold text-stone-900 mb-2">Door Frames & Engineered Options</h3>
+                        <p id="prodDesc1" class="text-xs text-stone-600 leading-relaxed mb-4">
+                            Crafted from premium imported and Indian Teak, Red Meranti, and Malaysian Sal. Kiln-seasoned for moisture stability with flawless corner joint fitting.
+                        </p>
+                        <ul class="space-y-2 text-xs text-stone-700 mb-6">
+                            <li class="flex items-center space-x-2">
+                                <i class="fa-solid fa-check text-gold-600"></i>
+                                <span>Engineered Options: Zero warpage & twist</span>
+                            </li>
+                            <li class="flex items-center space-x-2">
+                                <i class="fa-solid fa-check text-gold-600"></i>
+                                <span>Pre-primered at factory for quick finish</span>
+                            </li>
+                            <li class="flex items-center space-x-2">
+                                <i class="fa-solid fa-check text-gold-600"></i>
+                                <span>No expansion, shrinkage, or sapwood defects</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <span class="text-xs font-bold text-gold-600 uppercase tracking-wider">Teak / Red Meranti / Sal</span>
+                </div>
+
+                <!-- 2. Teak Wood Panel Shutters Gallery Card -->
+                <div class="glass-card rounded-2xl p-6 glass-card-hover transition border border-wood-300 flex flex-col justify-between group">
+                    <div>
+                        <div class="relative w-full h-52 rounded-xl overflow-hidden mb-4 shadow-md bg-stone-900" id="prodGallery2Container">
+                            <div class="relative w-full h-full" id="prodGallery2"></div>
+                            <button onclick="manualSlide('prod2', -1)" class="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 text-white flex items-center justify-center hover:bg-gold-500 hover:text-stone-950 transition opacity-0 group-hover:opacity-100 z-30 shadow">
+                                <i class="fa-solid fa-chevron-left text-xs"></i>
+                            </button>
+                            <button onclick="manualSlide('prod2', 1)" class="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 text-white flex items-center justify-center hover:bg-gold-500 hover:text-stone-950 transition opacity-0 group-hover:opacity-100 z-30 shadow">
+                                <i class="fa-solid fa-chevron-right text-xs"></i>
+                            </button>
+                        </div>
+
+                        <h3 id="prodTitle2" class="font-serif text-xl font-bold text-stone-900 mb-2">Teak Wood Panel Shutters</h3>
+                        <p id="prodDesc2" class="text-xs text-stone-600 leading-relaxed mb-4">
+                            Exquisite solid teak shutters designed for grand main entrances and decorative architectural statements.
+                        </p>
+                        <ul class="space-y-2 text-xs text-stone-700 mb-6">
+                            <li class="flex items-center space-x-2">
+                                <i class="fa-solid fa-check text-gold-600"></i>
+                                <span>4-Panel Classic & Ornate Carved Designs</span>
+                            </li>
+                            <li class="flex items-center space-x-2">
+                                <i class="fa-solid fa-check text-gold-600"></i>
+                                <span>Modern 3D Geometric Milling Patterns</span>
+                            </li>
+                            <li class="flex items-center space-x-2">
+                                <i class="fa-solid fa-check text-gold-600"></i>
+                                <span>Pooja Doors with Brass Bell Insets</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <span class="text-xs font-bold text-gold-600 uppercase tracking-wider">100% Solid Teak Wood</span>
+                </div>
+
+                <!-- 3. Veneered & HDF Skin Shutters Gallery Card -->
+                <div class="glass-card rounded-2xl p-6 glass-card-hover transition border border-wood-300 flex flex-col justify-between group">
+                    <div>
+                        <div class="relative w-full h-52 rounded-xl overflow-hidden mb-4 shadow-md bg-stone-900" id="prodGallery3Container">
+                            <div class="relative w-full h-full" id="prodGallery3"></div>
+                            <button onclick="manualSlide('prod3', -1)" class="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 text-white flex items-center justify-center hover:bg-gold-500 hover:text-stone-950 transition opacity-0 group-hover:opacity-100 z-30 shadow">
+                                <i class="fa-solid fa-chevron-left text-xs"></i>
+                            </button>
+                            <button onclick="manualSlide('prod3', 1)" class="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 text-white flex items-center justify-center hover:bg-gold-500 hover:text-stone-950 transition opacity-0 group-hover:opacity-100 z-30 shadow">
+                                <i class="fa-solid fa-chevron-right text-xs"></i>
+                            </button>
+                        </div>
+
+                        <h3 id="prodTitle3" class="font-serif text-xl font-bold text-stone-900 mb-2">Veneered & HDF Skin Doors</h3>
+                        <p id="prodDesc3" class="text-xs text-stone-600 leading-relaxed mb-4">
+                            Luxury architectural veneers and high-density fiberboard skins for contemporary apartment interiors.
+                        </p>
+                        <ul class="space-y-2 text-xs text-stone-700 mb-6">
+                            <li class="flex items-center space-x-2">
+                                <i class="fa-solid fa-check text-gold-600"></i>
+                                <span>Veneers: Natural Teak, Sapele, Walnut, White Oak</span>
+                            </li>
+                            <li class="flex items-center space-x-2">
+                                <i class="fa-solid fa-check text-gold-600"></i>
+                                <span>HDF Skins: Harmony, Oval, 2-Panel Arch, 6-Panel</span>
+                            </li>
+                            <li class="flex items-center space-x-2">
+                                <i class="fa-solid fa-check text-gold-600"></i>
+                                <span>Laminated, Grooved & Aluminium Foil accents</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <span class="text-xs font-bold text-gold-600 uppercase tracking-wider">Natural Veneer & High-Density Fiber</span>
+                </div>
+            </div>
+
+            <!-- Infill & Flush Doors Sub-Section -->
+            <div class="mt-12 glass-card p-8 rounded-2xl border border-wood-300">
+                <h3 class="font-serif text-2xl font-bold text-stone-900 mb-4 text-center">Flush Door Infill Technology</h3>
+                <p class="text-xs text-stone-600 text-center max-w-2xl mx-auto mb-8">
+                    Engineered inner core infills customized to balance acoustic insulation, structural rigidity, and weight optimization.
+                </p>
+
+                <div class="grid sm:grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="bg-wood-50 p-4 rounded-xl border border-wood-200 text-center">
+                        <i class="fa-solid fa-cubes text-gold-600 text-2xl mb-2"></i>
+                        <h4 class="text-sm font-bold text-stone-800">Solid Block Board Core</h4>
+                        <p class="text-[11px] text-stone-600 mt-1">Maximum density, strength, and sound dampening.</p>
+                    </div>
+                    <div class="bg-wood-50 p-4 rounded-xl border border-wood-200 text-center">
+                        <i class="fa-solid fa-bars text-gold-600 text-2xl mb-2"></i>
+                        <h4 class="text-sm font-bold text-stone-800">Tubular Board Infill</h4>
+                        <p class="text-[11px] text-stone-600 mt-1">German technology balancing weight & impact protection.</p>
+                    </div>
+                    <div class="bg-wood-50 p-4 rounded-xl border border-wood-200 text-center">
+                        <i class="fa-solid fa-border-all text-gold-600 text-2xl mb-2"></i>
+                        <h4 class="text-sm font-bold text-stone-800">Particle Board Infill</h4>
+                        <p class="text-[11px] text-stone-600 mt-1">Cost-effective uniform interior shutter core.</p>
+                    </div>
+                    <div class="bg-wood-50 p-4 rounded-xl border border-wood-200 text-center">
+                        <i class="fa-solid fa-hexagon text-gold-600 text-2xl mb-2"></i>
+                        <h4 class="text-sm font-bold text-stone-800">Honeycomb Infill</h4>
+                        <p class="text-[11px] text-stone-600 mt-1">Lightweight, high-plane stability for internal doors.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FACTORY FACILITY & QUALITY STANDARDS SECTION -->
+    <section id="factory" class="py-20 wood-pattern border-t border-wood-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-12 gap-12 items-center">
+                <div class="lg:col-span-6 space-y-6">
+                    <span class="px-3 py-1 bg-gold-500/10 border border-gold-500/30 text-gold-600 text-xs font-semibold rounded-full uppercase tracking-widest">
+                        Manufacturing Powerhouse
+                    </span>
+                    <h2 class="font-serif text-3xl md:text-4xl font-bold text-stone-900">
+                        State-of-the-Art Facility in <br><span class="text-gold-600">Sultanpur, Hyderabad</span>
+                    </h2>
+                    <p class="text-stone-700 text-sm md:text-base leading-relaxed">
+                        Spanning an expansive footprint at <strong>Medical Devices Park, Sultanpur, Hyderabad</strong>, Elite Infra Products operates heavy-duty CNC routers, automated hot pressing machines, and advanced seasoning kilns.
+                    </p>
+
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-4">
+                        <div class="glass-card p-4 rounded-xl text-center border border-wood-300">
+                            <i class="fa-solid fa-bug-slash text-gold-600 text-2xl mb-2"></i>
+                            <h4 class="text-xs font-bold text-stone-800">Borer Free</h4>
+                            <p class="text-[10px] text-stone-600 mt-1">Chemically treated timber</p>
+                        </div>
+                        <div class="glass-card p-4 rounded-xl text-center border border-wood-300">
+                            <i class="fa-solid fa-droplet-slash text-gold-600 text-2xl mb-2"></i>
+                            <h4 class="text-xs font-bold text-stone-800">Water Proof</h4>
+                            <p class="text-[10px] text-stone-600 mt-1">Resilient resin binding</p>
+                        </div>
+                        <div class="glass-card p-4 rounded-xl text-center border border-wood-300">
+                            <i class="fa-solid fa-shield-virus text-gold-600 text-2xl mb-2"></i>
+                            <h4 class="text-xs font-bold text-stone-800">Fungus Free</h4>
+                            <p class="text-[10px] text-stone-600 mt-1">Moisture resistant</p>
+                        </div>
+                        <div class="glass-card p-4 rounded-xl text-center border border-wood-300">
+                            <i class="fa-solid fa-leaf text-gold-600 text-2xl mb-2"></i>
+                            <h4 class="text-xs font-bold text-stone-800">Eco Friendly</h4>
+                            <p class="text-[10px] text-stone-600 mt-1">Sustainable timber sourcing</p>
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-wood-100/80 rounded-xl border-l-4 border-gold-500 text-xs text-stone-800">
+                        <strong>Why Pre-Hung Sets Win:</strong> Eliminates planing, squaring, and fitting hassles on-site. Direct installation during the final finishing phase protects project schedules and reduces site damage.
+                    </div>
+                </div>
+
+                <!-- Factory Photo Gallery Showcase -->
+                <div class="lg:col-span-6 glass-card p-6 rounded-2xl border border-wood-300 space-y-6">
+                    <h3 class="font-serif text-xl font-bold text-stone-900 border-b border-wood-200 pb-3 flex items-center justify-between">
+                        <span>Sultanpur Plant Floor & Machinery</span>
+                        <i class="fa-solid fa-industry text-gold-600"></i>
+                    </h3>
+
+                    <div class="relative w-full h-72 rounded-xl overflow-hidden shadow-xl bg-stone-900 group" id="factoryGalleryContainer">
+                        <div class="relative w-full h-full" id="factoryGallery"></div>
+                        <button onclick="manualSlide('factory', -1)" class="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/50 text-white flex items-center justify-center hover:bg-gold-500 hover:text-stone-950 transition opacity-0 group-hover:opacity-100 z-30 shadow">
+                            <i class="fa-solid fa-chevron-left text-xs"></i>
+                        </button>
+                        <button onclick="manualSlide('factory', 1)" class="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/50 text-white flex items-center justify-center hover:bg-gold-500 hover:text-stone-950 transition opacity-0 group-hover:opacity-100 z-30 shadow">
+                            <i class="fa-solid fa-chevron-right text-xs"></i>
+                        </button>
+                    </div>
+
+                    <ul class="space-y-3 text-xs text-stone-700">
+                        <li class="flex items-start space-x-3">
+                            <i class="fa-solid fa-location-dot text-gold-600 mt-0.5 text-base"></i>
+                            <div>
+                                <strong class="text-stone-900 block">Factory Address:</strong>
+                                <span id="factoryAddressText">Plot No. G-42/2, Medical Devices Park, Sultanpur, Ameenpur Mandal, Sangareddy, Telangana - 502032.</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start space-x-3">
+                            <i class="fa-solid fa-phone text-gold-600 mt-0.5 text-base"></i>
+                            <div>
+                                <strong class="text-stone-900 block">Direct Helplines:</strong>
+                                <span id="factoryPhoneText">+91 9100009781 | +91 9100009782</span>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <div class="pt-2">
+                        <a href="https://maps.google.com/?q=Medical+Devices+Park+Sultanpur+Hyderabad" target="_blank" class="w-full bg-wood-100 hover:bg-wood-200 border border-wood-300 text-gold-600 font-semibold py-2.5 rounded-lg text-center block text-xs transition">
+                            <i class="fa-solid fa-map-location-dot mr-2"></i> Open Location in Google Maps
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- B2B CLIENTS & DEVELOPER PARTNERS SECTION -->
+    <section id="clients" class="py-20 border-t border-wood-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="px-3 py-1 bg-wood-100 border border-wood-300 text-gold-600 text-xs font-semibold rounded-full uppercase tracking-widest">
+                    Institutional Trust
+                </span>
+                <h2 class="font-serif text-3xl md:text-4xl font-bold text-stone-900 mt-3">Our Valued B2B Partners</h2>
+                <p class="text-stone-600 text-sm md:text-base mt-2">Trusted by over 60 premier real estate developers, infrastructure leaders, and builders across Hyderabad & Telangana.</p>
+            </div>
+
+            <div id="clientsGrid" class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"></div>
+        </div>
+    </section>
+
+    <!-- FOOTER & CONTACT SECTION -->
+    <footer id="contact" class="bg-stone-900 border-t border-wood-900 pt-16 pb-12 text-stone-400 text-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-12 gap-8 mb-12">
+                <div class="md:col-span-5 space-y-4">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 rounded bg-wood-900 border border-gold-500/30 flex items-center justify-center p-1">
+                            <img id="footerLogo" src="https://via.placeholder.com/150/2d1e15/d4af37?text=ELITE" alt="Elite Logo" class="max-h-full object-contain">
+                        </div>
+                        <span class="font-serif text-xl font-bold text-stone-100">ELITE INFRA PRODUCTS</span>
+                    </div>
+                    <p class="text-xs text-stone-400 leading-relaxed max-w-sm">
+                        High-performance engineered doors, frames, and custom teak wood solutions for residential and commercial infrastructure across Telangana.
+                    </p>
+                </div>
+
+                <div class="md:col-span-3 space-y-2">
+                    <h4 class="font-serif text-stone-200 font-bold mb-3">Quick Links</h4>
+                    <ul class="space-y-2 text-xs">
+                        <li><a href="#about" class="hover:text-gold-400 transition">About Company</a></li>
+                        <li><a href="#customizer" class="hover:text-gold-400 transition">3D Door Customizer</a></li>
+                        <li><a href="#products" class="hover:text-gold-400 transition">Products & Timber</a></li>
+                        <li><a href="#factory" class="hover:text-gold-400 transition">Factory & Quality</a></li>
+                        <li><a href="#clients" class="hover:text-gold-400 transition">B2B Partners</a></li>
+                    </ul>
+                </div>
+
+                <div class="md:col-span-4 space-y-3">
+                    <h4 class="font-serif text-stone-200 font-bold mb-3">Contact Helpline</h4>
+                    <p class="text-xs"><i class="fa-solid fa-phone text-gold-400 mr-2"></i> <span id="footerPhone">+91 9100009781 | 9100009782</span></p>
+                    <p class="text-xs"><i class="fa-solid fa-envelope text-gold-400 mr-2"></i> <span id="footerEmail">eliteinfraproducts@gmail.com</span></p>
+                    <p class="text-xs"><i class="fa-solid fa-globe text-gold-400 mr-2"></i> www.eliteinfraproducts.com</p>
+                </div>
+            </div>
+
+            <div class="border-t border-wood-800 pt-8 flex flex-col md:flex-row items-center justify-between text-xs text-stone-500">
+                <p>&copy; 2026 Elite Infra Products. All Rights Reserved. (Formerly Aruna Timbers est. 2012)</p>
+                <button onclick="openLoginModal()" class="mt-4 md:mt-0 text-gold-500/70 hover:text-gold-400 flex items-center space-x-1">
+                    <i class="fa-solid fa-lock text-xs"></i>
+                    <span>Admin Control Panel</span>
+                </button>
+            </div>
+        </div>
+    </footer>
+
+    <!-- AI ASSISTANT WIDGET -->
+    <div id="aiAssistantContainer" class="fixed bottom-6 right-6 z-50">
+        <button onclick="toggleAIChat()" class="w-14 h-14 rounded-full bg-gradient-to-r from-gold-500 to-wood-600 text-stone-950 shadow-2xl flex items-center justify-center hover:scale-105 transition border-2 border-gold-300">
+            <i class="fa-solid fa-robot text-2xl"></i>
+        </button>
+
+        <div id="aiChatCard" class="absolute bottom-20 right-0 w-80 sm:w-96 glass-card rounded-2xl border border-gold-500/30 shadow-2xl flex flex-col h-[480px] overflow-hidden hidden">
+            <div class="bg-wood-950 p-4 border-b border-wood-800 flex justify-between items-center text-white">
+                <div class="flex items-center space-x-3">
+                    <div class="w-8 h-8 rounded-full bg-gold-500/20 border border-gold-500/40 flex items-center justify-center text-gold-400 text-sm">
+                        <i class="fa-solid fa-headset"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-serif text-sm font-bold text-stone-100">Elite Timber AI Assistant</h4>
+                        <span class="text-[10px] text-green-400 flex items-center"><span class="w-1.5 h-1.5 bg-green-400 rounded-full mr-1"></span> Online | Instant Help</span>
+                    </div>
+                </div>
+                <button onclick="toggleAIChat()" class="text-stone-400 hover:text-stone-100 text-lg">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <div id="aiChatMessages" class="flex-1 p-4 overflow-y-auto space-y-3 text-xs bg-white/50 dark:bg-stone-900/50">
+                <div class="bg-wood-900 text-stone-100 p-3 rounded-xl max-w-[85%] border border-wood-800">
+                    Hello! I am Elite Infra's AI Assistant. How can I help you regarding our pre-hung doors, teak shutters, timber species, or factory specs in Sultanpur?
+                </div>
+            </div>
+
+            <div class="p-3 bg-wood-950 border-t border-wood-800 flex space-x-2">
+                <input type="text" id="aiChatInput" placeholder="Ask about door prices, specs, timber..." onkeypress="handleAIPress(event)" class="flex-1 bg-wood-900 border border-wood-700 rounded-lg px-3 py-2 text-stone-200 text-xs focus:outline-none focus:border-gold-500">
+                <button onclick="sendAIMessage()" class="bg-gold-500 text-stone-950 px-3 py-2 rounded-lg text-xs font-bold hover:bg-gold-400 transition">
+                    <i class="fa-solid fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ADMIN CONTROL PANEL MODAL -->
+    <div id="adminModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+        
+        <!-- LOGIN STAGE -->
+        <div id="adminLoginForm" class="glass-card max-w-md w-full p-8 rounded-2xl border border-gold-500/30 space-y-6">
+            <div class="text-center">
+                <div class="w-12 h-12 rounded-full bg-gold-500/10 border border-gold-500/30 flex items-center justify-center text-gold-600 text-xl mx-auto mb-3">
+                    <i class="fa-solid fa-lock"></i>
+                </div>
+                <h3 class="font-serif text-2xl font-bold text-stone-900">Elite Control Panel</h3>
+                <p class="text-xs text-stone-600 mt-1">Please enter your authorized credentials</p>
+            </div>
+
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold text-stone-700 uppercase mb-1">Username / Key</label>
+                    <input type="text" id="adminUser" placeholder="Username" class="w-full bg-white border border-wood-300 rounded-lg px-3 py-2 text-stone-800 text-sm focus:border-gold-500 focus:outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-stone-700 uppercase mb-1">Password</label>
+                    <input type="password" id="adminPass" placeholder="Password" class="w-full bg-white border border-wood-300 rounded-lg px-3 py-2 text-stone-800 text-sm focus:border-gold-500 focus:outline-none">
+                </div>
+                <div id="loginError" class="text-red-500 text-xs text-center hidden">
+                    Invalid credentials! Please try again.
+                </div>
+            </div>
+
+            <div class="flex gap-3">
+                <button onclick="closeLoginModal()" class="w-1/2 glass-card text-stone-800 py-2.5 rounded-lg text-sm font-semibold hover:bg-wood-100">Cancel</button>
+                <button onclick="verifyLogin()" class="w-1/2 bg-gradient-to-r from-gold-500 to-wood-500 text-stone-950 py-2.5 rounded-lg text-sm font-bold hover:brightness-110">Login</button>
+            </div>
+        </div>
+
+        <!-- DYNAMIC CMS CONTROL PANEL STAGE -->
+        <div id="adminPanelContent" class="glass-card max-w-4xl w-full h-[88vh] p-6 rounded-2xl border border-gold-500/40 flex flex-col hidden overflow-hidden bg-white text-stone-800">
+            
+            <div class="border-b border-wood-200 pb-4 mb-4 flex justify-between items-center">
+                <div class="flex items-center space-x-3">
+                    <i class="fa-solid fa-sliders text-gold-600 text-xl"></i>
+                    <div>
+                        <h3 class="font-serif text-xl font-bold text-stone-900">Site Content & Tone Control Panel</h3>
+                        <p class="text-xs text-stone-600">Update hero info, legacy & vision, products portfolio, factory gallery, and site details live</p>
+                    </div>
+                </div>
+                <button onclick="closeLoginModal()" class="text-stone-500 hover:text-stone-900 text-2xl">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <!-- Editor Form Scrollable Area -->
+            <div class="flex-1 overflow-y-auto space-y-6 pr-2">
+                
+                <!-- Background Tone Control -->
+                <div class="bg-wood-50 p-4 rounded-xl border border-wood-200 space-y-3">
+                    <h4 class="font-serif text-sm font-bold text-gold-600 uppercase tracking-wider">🎨 Background Tone & Color Picker</h4>
+                    <div>
+                        <label class="block text-xs text-stone-700 mb-1">Custom Background Color Wheel / Picker</label>
+                        <div class="flex items-center space-x-3">
+                            <input type="color" id="cmsBgColor" onchange="updateBgTone(this.value)" class="w-12 h-10 border border-wood-300 rounded cursor-pointer">
+                            <span class="text-xs text-stone-600">Quick Select Preset Tones:</span>
+                        </div>
+                        <div class="flex flex-wrap gap-2 mt-3">
+                            <button onclick="updateBgTone('#ffffff')" class="px-3 py-1 bg-white border border-stone-300 text-xs text-stone-800 rounded font-medium shadow-sm">Pure White</button>
+                            <button onclick="updateBgTone('#fdfbf7')" class="px-3 py-1 bg-[#fdfbf7] border border-stone-300 text-xs text-stone-800 rounded font-medium shadow-sm">Warm Cream</button>
+                            <button onclick="updateBgTone('#f3f4f6')" class="px-3 py-1 bg-[#f3f4f6] border border-stone-300 text-xs text-stone-800 rounded font-medium shadow-sm">Soft Gray</button>
+                            <button onclick="updateBgTone('#120f0d')" class="px-3 py-1 bg-[#120f0d] text-xs text-white rounded font-medium shadow-sm">Dark Wood</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hero Info Customization -->
+                <div class="bg-wood-50 p-4 rounded-xl border border-wood-200 space-y-3">
+                    <h4 class="font-serif text-sm font-bold text-gold-600 uppercase tracking-wider">✏️ Hero Section Information</h4>
+                    <div>
+                        <label class="block text-xs text-stone-700 mb-1">Sub-Headline Tag</label>
+                        <input type="text" id="cmsHeroSub" class="w-full bg-white border border-wood-300 rounded p-2 text-xs text-stone-800">
+                    </div>
+                    <div>
+                        <label class="block text-xs text-stone-700 mb-1">Main Title</label>
+                        <input type="text" id="cmsHeroTitle" class="w-full bg-white border border-wood-300 rounded p-2 text-xs text-stone-800">
+                    </div>
+                    <div>
+                        <label class="block text-xs text-stone-700 mb-1">Hero Description Paragraph</label>
+                        <textarea id="cmsHeroTagline" rows="3" class="w-full bg-white border border-wood-300 rounded p-2 text-xs text-stone-800"></textarea>
+                    </div>
+                </div>
+
+                <!-- NEW SECTION 1: Our Legacy & Vision Control -->
+                <div class="bg-wood-50 p-4 rounded-xl border border-wood-200 space-y-3">
+                    <h4 class="font-serif text-sm font-bold text-gold-600 uppercase tracking-wider">🏛️ 1. Our Legacy & Vision Section</h4>
+                    <div>
+                        <label class="block text-xs text-stone-700 mb-1">Badge Title</label>
+                        <input type="text" id="cmsAboutBadge" class="w-full bg-white border border-wood-300 rounded p-2 text-xs text-stone-800">
+                    </div>
+                    <div>
+                        <label class="block text-xs text-stone-700 mb-1">Section Heading Title</label>
+                        <input type="text" id="cmsAboutTitle" class="w-full bg-white border border-wood-300 rounded p-2 text-xs text-stone-800">
+                    </div>
+                    <div>
+                        <label class="block text-xs text-stone-700 mb-1">Backstory Content / Bio Paragraphs</label>
+                        <textarea id="cmsAboutBio" rows="5" class="w-full bg-white border border-wood-300 rounded p-2 text-xs text-stone-800"></textarea>
+                    </div>
+                </div>
+
+                <!-- NEW SECTION 2: Craftsmanship Portfolio Control & Image Uploads -->
+                <div class="bg-wood-50 p-4 rounded-xl border border-wood-200 space-y-3">
+                    <h4 class="font-serif text-sm font-bold text-gold-600 uppercase tracking-wider">🚪 2. Craftsmanship Portfolio (Products & Woods)</h4>
+                    
+                    <!-- Card 1 Editor -->
+                    <div class="p-3 bg-white rounded border border-wood-200 space-y-2">
+                        <span class="text-xs font-bold text-stone-800 block">Card 1: Door Frames & Engineered Options</span>
+                        <input type="text" id="cmsProdTitle1" placeholder="Card Title" class="w-full border border-wood-300 rounded p-1.5 text-xs">
+                        <textarea id="cmsProdDesc1" rows="2" placeholder="Card Description" class="w-full border border-wood-300 rounded p-1.5 text-xs"></textarea>
+                        <div class="flex gap-2">
+                            <input type="file" id="cmsProdFile1" accept="image/*" class="w-1/2 border border-wood-300 rounded p-1 text-[11px]">
+                            <input type="text" id="cmsProdUrl1" placeholder="OR Paste Image URL" class="w-1/2 border border-wood-300 rounded p-1.5 text-xs">
+                        </div>
+                        <button onclick="addProductSlide(1)" class="bg-wood-800 text-white text-xs px-3 py-1 rounded">+ Add Photo to Card 1 Gallery</button>
+                    </div>
+
+                    <!-- Card 2 Editor -->
+                    <div class="p-3 bg-white rounded border border-wood-200 space-y-2">
+                        <span class="text-xs font-bold text-stone-800 block">Card 2: Teak Wood Panel Shutters</span>
+                        <input type="text" id="cmsProdTitle2" placeholder="Card Title" class="w-full border border-wood-300 rounded p-1.5 text-xs">
+                        <textarea id="cmsProdDesc2" rows="2" placeholder="Card Description" class="w-full border border-wood-300 rounded p-1.5 text-xs"></textarea>
+                        <div class="flex gap-2">
+                            <input type="file" id="cmsProdFile2" accept="image/*" class="w-1/2 border border-wood-300 rounded p-1 text-[11px]">
+                            <input type="text" id="cmsProdUrl2" placeholder="OR Paste Image URL" class="w-1/2 border border-wood-300 rounded p-1.5 text-xs">
+                        </div>
+                        <button onclick="addProductSlide(2)" class="bg-wood-800 text-white text-xs px-3 py-1 rounded">+ Add Photo to Card 2 Gallery</button>
+                    </div>
+
+                    <!-- Card 3 Editor -->
+                    <div class="p-3 bg-white rounded border border-wood-200 space-y-2">
+                        <span class="text-xs font-bold text-stone-800 block">Card 3: Veneered & HDF Skin Doors</span>
+                        <input type="text" id="cmsProdTitle3" placeholder="Card Title" class="w-full border border-wood-300 rounded p-1.5 text-xs">
+                        <textarea id="cmsProdDesc3" rows="2" placeholder="Card Description" class="w-full border border-wood-300 rounded p-1.5 text-xs"></textarea>
+                        <div class="flex gap-2">
+                            <input type="file" id="cmsProdFile3" accept="image/*" class="w-1/2 border border-wood-300 rounded p-1 text-[11px]">
+                            <input type="text" id="cmsProdUrl3" placeholder="OR Paste Image URL" class="w-1/2 border border-wood-300 rounded p-1.5 text-xs">
+                        </div>
+                        <button onclick="addProductSlide(3)" class="bg-wood-800 text-white text-xs px-3 py-1 rounded">+ Add Photo to Card 3 Gallery</button>
+                    </div>
+                </div>
+
+                <!-- NEW SECTION 3: Factory Photos Section Control -->
+                <div class="bg-wood-50 p-4 rounded-xl border border-wood-200 space-y-3">
+                    <h4 class="font-serif text-sm font-bold text-gold-600 uppercase tracking-wider">🏭 3. Factory Photos Section (Sultanpur Plant)</h4>
+                    <div class="space-y-2">
+                        <label class="block text-xs text-stone-700">Upload Factory Floor/Machinery Image or Enter URL</label>
+                        <div class="flex gap-2">
+                            <input type="file" id="cmsFactoryFileInput" accept="image/*" class="w-1/2 bg-white border border-wood-300 rounded p-1.5 text-xs text-stone-800">
+                            <input type="text" id="cmsFactoryUrlInput" placeholder="OR Paste Image URL" class="w-1/2 bg-white border border-wood-300 rounded p-2 text-xs text-stone-800">
+                        </div>
+                        <button onclick="addFactoryPhoto()" class="bg-wood-800 text-white text-xs px-4 py-2 rounded font-semibold hover:bg-wood-700 transition">
+                            + Add Photo to Factory Gallery
+                        </button>
+                    </div>
+                    
+                    <div class="mt-3">
+                        <label class="block text-xs font-semibold text-stone-700 mb-1">Active Factory Gallery Photos:</label>
+                        <div id="cmsFactoryPhotoList" class="grid grid-cols-3 gap-2 max-h-36 overflow-y-auto p-1 border border-wood-200 rounded bg-white"></div>
+                    </div>
+                </div>
+
+                <!-- Hero Slideshow Photos -->
+                <div class="bg-wood-50 p-4 rounded-xl border border-wood-200 space-y-3">
+                    <h4 class="font-serif text-sm font-bold text-gold-600 uppercase tracking-wider">📷 Hero Slideshow Photo Uploads (4.7s Interval)</h4>
+                    <div class="space-y-2">
+                        <div class="flex gap-2">
+                            <input type="file" id="cmsPhotoFileInput" accept="image/*" class="w-1/2 bg-white border border-wood-300 rounded p-1.5 text-xs text-stone-800">
+                            <input type="text" id="cmsPhotoUrlInput" placeholder="OR Paste Image URL" class="w-1/2 bg-white border border-wood-300 rounded p-2 text-xs text-stone-800">
+                        </div>
+                        <button onclick="addPhotoToSlideshow()" class="bg-wood-800 text-white text-xs px-4 py-2 rounded font-semibold hover:bg-wood-700 transition">
+                            + Add Photo to Hero Slideshow
+                        </button>
+                    </div>
+                    <div id="cmsPhotoList" class="grid grid-cols-3 gap-2 max-h-36 overflow-y-auto p-1 border border-wood-200 rounded bg-white"></div>
+                </div>
+
+                <!-- Brand Logo Update -->
+                <div class="bg-wood-50 p-4 rounded-xl border border-wood-200 space-y-3">
+                    <h4 class="font-serif text-sm font-bold text-gold-600 uppercase tracking-wider">Brand Logo Update</h4>
+                    <input type="file" id="cmsLogoFileInput" accept="image/*" class="w-full bg-white border border-wood-300 rounded p-1.5 text-xs text-stone-800">
+                    <div id="cmsLogoPreviewContainer" class="mt-2 hidden">
+                        <img id="cmsLogoPreview" src="" alt="Logo Preview" class="h-12 object-contain border border-wood-300 p-1 rounded bg-white">
+                    </div>
+                </div>
+
+                <!-- Contact Details -->
+                <div class="bg-wood-50 p-4 rounded-xl border border-wood-200 space-y-3">
+                    <h4 class="font-serif text-sm font-bold text-gold-600 uppercase tracking-wider">Contact Numbers & Email</h4>
+                    <div class="grid md:grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-xs text-stone-700 mb-1">Helpline Phone Numbers</label>
+                            <input type="text" id="cmsPhone" class="w-full bg-white border border-wood-300 rounded p-2 text-xs text-stone-800">
+                        </div>
+                        <div>
+                            <label class="block text-xs text-stone-700 mb-1">Official Email Address</label>
+                            <input type="text" id="cmsEmail" class="w-full bg-white border border-wood-300 rounded p-2 text-xs text-stone-800">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Client Roster Editor -->
+                <div class="bg-wood-50 p-4 rounded-xl border border-wood-200 space-y-3">
+                    <div class="flex justify-between items-center">
+                        <h4 class="font-serif text-sm font-bold text-gold-600 uppercase tracking-wider">Manage B2B Client List</h4>
+                        <button onclick="addNewClientField()" class="bg-gold-500/20 border border-gold-500/40 text-gold-700 px-3 py-1 rounded text-xs hover:bg-gold-500 hover:text-stone-950 transition font-bold">+ Add Client</button>
+                    </div>
+                    <div id="cmsClientInputs" class="grid sm:grid-cols-2 md:grid-cols-3 gap-2 max-h-48 overflow-y-auto p-1"></div>
+                </div>
+
+            </div>
+
+            <div class="border-t border-wood-200 pt-4 mt-4 flex justify-between items-center">
+                <button onclick="resetCMSDefaults()" class="text-xs text-red-500 hover:underline">Reset Factory Defaults</button>
+                <button onclick="saveCMSChanges()" class="bg-gradient-to-r from-gold-500 to-wood-500 text-stone-950 px-6 py-2.5 rounded-lg text-sm font-bold hover:brightness-110">
+                    <i class="fa-solid fa-floppy-disk mr-2"></i> Save & Publish Site Changes
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        const defaultClients = [
+            "Abide Infra Solutions", "AGILE INFRASTRUCTURE", "AKSARA CONSTRUCTIONS", "Allied Infra and Developers",
+            "AR HOMES", "ARKA CONSTRUCTIONS", "Arrow Industries", "A S Constructions",
+            "AURO REALTY PRIVATE LIMITED", "Bhuvan Grandeur Constructions", "Challa Constructions", "DHRUVA DEVELOPERS",
+            "D PROPERTIES", "Enlight Homes", "Fortune Infra and Engineering", "Gear Up Projects",
+            "GHPL Urban Greenery & ECO Projects", "Greater Infra Builders and Developers", "Greater Infra Projects Private Limited", "Gvr Infra Projects Ltd",
+            "Kamidi Reality Private Limited", "Makuta Developers", "Makuta Developers & Infrastructures", "Makuta Projects Llp",
+            "Manju Mythri Infra", "Maruthi Builders", "Msr E-Green Homes", "N ESTATES",
+            "Northstar Homes & Spaces Pvt Ltd", "Oakron Constructions", "PLANET CONSTRUCTIONS", "Ramireddy Venkata Subbareddy",
+            "Safe and Sure Projects", "Sai Doors & Decors", "Sai Neeraj Constructions India Pvt Ltd", "Sairam Constructions",
+            "SANKALP SILV TRADING", "Senzyme Private Limited", "Sardar Iqbal Singh (Rents)", "Shree Gouri Shankar Engg Constructions",
+            "Siri Developers", "SMD Constructions", "Sora Constructions", "Speed Housing LLP",
+            "SR Constructions", "SR ELITE HOMES", "Sr Elite Infra", "SR Homes",
+            "SSV Constructions", "SSV Homes Builders & Developers", "Ssv Infra Developers", "Sterling Homes Private Limited",
+            "Sumadhura Infracon Private Limited", "Sunshine Infra", "Swastlik Enterprises", "UVR INFRA",
+            "Vajra Housing Projects Llp", "Venkata Praneeth Developers Pvt Ltd", "VSR Infra & Developers", "Wise Earth Constructions Llp"
+        ];
+
+        const defaultHeroPhotos = [
+            "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=800&q=80",
+            "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80",
+            "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80"
+        ];
+
+        const defaultFactoryPhotos = [
+            "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80",
+            "https://images.unsplash.com/photo-1541888946425-d0fbb186a5b3?auto=format&fit=crop&w=800&q=80",
+            "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=800&q=80"
+        ];
+
+        const defaultProducts = [
+            {
+                title: "Door Frames & Engineered Options",
+                desc: "Crafted from premium imported and Indian Teak, Red Meranti, and Malaysian Sal. Kiln-seasoned for moisture stability with flawless corner joint fitting.",
+                photos: [
+                    "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=600&q=80",
+                    "https://images.unsplash.com/photo-1541888946425-d0fbb186a5b3?auto=format&fit=crop&w=600&q=80",
+                    "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=600&q=80"
+                ]
+            },
+            {
+                title: "Teak Wood Panel Shutters",
+                desc: "Exquisite solid teak shutters designed for grand main entrances and decorative architectural statements.",
+                photos: [
+                    "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=600&q=80",
+                    "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=600&q=80",
+                    "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=600&q=80"
+                ]
+            },
+            {
+                title: "Veneered & HDF Skin Doors",
+                desc: "Luxury architectural veneers and high-density fiberboard skins for contemporary apartment interiors.",
+                photos: [
+                    "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=600&q=80",
+                    "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=600&q=80",
+                    "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=600&q=80"
+                ]
+            }
+        ];
+
+        let siteData = {
+            bgTone: localStorage.getItem('elite_bg_tone') || "#ffffff",
+            heroSub: localStorage.getItem('elite_hero_sub') || "Hyderabad's Premier B2B Door Manufacturer",
+            heroTitle: localStorage.getItem('elite_hero_title') || "Architectural Precision. Timeless Timber Craft.",
+            heroTagline: localStorage.getItem('elite_hero_tagline') || "A legacy of timber expertise since 1997. Delivering engineered pre-hung door sets, teak carved shutters, and architectural veneers for Hyderabad’s prestigious residential complexes and high-rises.",
+            aboutBadge: localStorage.getItem('elite_about_badge') || "Our Legacy & Vision",
+            aboutTitle: localStorage.getItem('elite_about_title') || "From Aruna Timbers to Elite Infra Products",
+            aboutBio: localStorage.getItem('elite_about') || "Starting our journey in reputed timber units back in 1997, our foundational expertise inspired the launch of Aruna Timbers in 2012. Elite Infra Products was established in 2022 as a dedicated manufacturing plant in Sultanpur, Hyderabad, producing over 3,000 custom door sets monthly.",
+            photos: JSON.parse(localStorage.getItem('elite_photos')) || defaultHeroPhotos,
+            factoryPhotos: JSON.parse(localStorage.getItem('elite_factory_photos')) || defaultFactoryPhotos,
+            products: JSON.parse(localStorage.getItem('elite_products')) || defaultProducts,
+            logoUrl: localStorage.getItem('elite_logo') || "https://via.placeholder.com/150/2d1e15/d4af37?text=ELITE",
+            phone: localStorage.getItem('elite_phone') || "+91 9100009781 | +91 9100009782",
+            email: localStorage.getItem('elite_email') || "eliteinfraproducts@gmail.com",
+            clients: JSON.parse(localStorage.getItem('elite_clients')) || defaultClients
+        };
+
+        let sliderStates = {
+            hero: { current: 0, total: 3, interval: null },
+            prod1: { current: 0, total: 3, interval: null },
+            prod2: { current: 0, total: 3, interval: null },
+            prod3: { current: 0, total: 3, interval: null },
+            factory: { current: 0, total: 3, interval: null }
+        };
+
+        function applySiteData() {
+            updateBgTone(siteData.bgTone, false);
+
+            document.getElementById('heroSubHeadline').innerText = siteData.heroSub;
+            document.getElementById('heroMainTitle').innerHTML = siteData.heroTitle;
+            document.getElementById('heroTagline').innerText = siteData.heroTagline;
+
+            document.getElementById('aboutBadgeText').innerText = siteData.aboutBadge;
+            document.getElementById('aboutMainTitle').innerHTML = siteData.aboutTitle.includes('Elite Infra') ? siteData.aboutTitle.replace('Elite Infra Products', '<span class="text-gold-600">Elite Infra Products</span>') : siteData.aboutTitle;
+            
+            const aboutContainer = document.getElementById('aboutTextContent');
+            if (aboutContainer) {
+                aboutContainer.innerHTML = `<p>${siteData.aboutBio.replace(/\n/g, '</p><p>')}</p>`;
+            }
+
+            document.getElementById('siteLogo').src = siteData.logoUrl;
+            document.getElementById('footerLogo').src = siteData.logoUrl;
+
+            document.getElementById('factoryPhoneText').innerText = siteData.phone;
+            document.getElementById('footerPhone').innerText = siteData.phone;
+            document.getElementById('factoryEmailText').innerText = siteData.email;
+            document.getElementById('footerEmail').innerText = siteData.email;
+
+            // Render Products Portfolio Cards
+            for (let i = 0; i < 3; i++) {
+                const prod = siteData.products[i];
+                document.getElementById(`prodTitle${i+1}`).innerText = prod.title;
+                document.getElementById(`prodDesc${i+1}`).innerText = prod.desc;
+                
+                const galleryContainer = document.getElementById(`prodGallery${i+1}`);
+                galleryContainer.innerHTML = '';
+                prod.photos.forEach((src, sIdx) => {
+                    galleryContainer.innerHTML += `<img src="${src}" class="slider-img ${sIdx === 0 ? 'active' : ''}" alt="Product ${i+1}">`;
+                });
+                sliderStates[`prod${i+1}`].total = prod.photos.length;
+                sliderStates[`prod${i+1}`].current = 0;
+            }
+
+            initHeroSlideshow();
+            initFactorySlideshow();
+            initAutoSliders();
+
+            const grid = document.getElementById('clientsGrid');
+            if (grid) {
+                grid.innerHTML = '';
+                siteData.clients.forEach((client, idx) => {
+                    grid.innerHTML += `
+                        <div class="glass-card p-4 rounded-xl border border-wood-300 flex items-center space-x-3 glass-card-hover transition">
+                            <div class="w-8 h-8 rounded-full bg-gold-500/10 text-gold-600 flex items-center justify-center font-bold text-xs shrink-0 border border-gold-500/20">
+                                ${idx + 1}
+                            </div>
+                            <span class="text-xs font-medium text-stone-800 truncate">${client}</span>
+                        </div>
+                    `;
+                });
+            }
+        }
+
+        function updateBgTone(colorHex, saveToState = true) {
+            document.documentElement.style.setProperty('--page-bg-tone', colorHex);
+            if (colorHex === '#120f0d') {
+                document.body.classList.add('dark-mode');
+                document.documentElement.style.setProperty('--page-text-color', '#f3f4f6');
+            } else {
+                document.body.classList.remove('dark-mode');
+                document.documentElement.style.setProperty('--page-text-color', '#1f2937');
+            }
+            if (saveToState) siteData.bgTone = colorHex;
+        }
+
+        function initHeroSlideshow() {
+            const container = document.getElementById('heroSlideshow');
+            if (!container) return;
+            container.innerHTML = '';
+            siteData.photos.forEach((src, idx) => {
+                const img = document.createElement('img');
+                img.src = src;
+                img.className = `slider-img ${idx === 0 ? 'active' : ''}`;
+                container.appendChild(img);
+            });
+            sliderStates.hero.total = siteData.photos.length;
+            sliderStates.hero.current = 0;
+        }
+
+        function initFactorySlideshow() {
+            const container = document.getElementById('factoryGallery');
+            if (!container) return;
+            container.innerHTML = '';
+            siteData.factoryPhotos.forEach((src, idx) => {
+                const img = document.createElement('img');
+                img.src = src;
+                img.className = `slider-img ${idx === 0 ? 'active' : ''}`;
+                container.appendChild(img);
+            });
+            sliderStates.factory.total = siteData.factoryPhotos.length;
+            sliderStates.factory.current = 0;
+        }
+
+        function initAutoSliders() {
+            ['hero', 'prod1', 'prod2', 'prod3', 'factory'].forEach(sliderId => {
+                clearInterval(sliderStates[sliderId].interval);
+                sliderStates[sliderId].interval = setInterval(() => {
+                    manualSlide(sliderId, 1);
+                }, 4700);
+            });
+        }
+
+        function manualSlide(sliderName, direction) {
+            const state = sliderStates[sliderName];
+            if (!state) return;
+            let containerId = sliderName === 'hero' ? 'heroSlideshow' : 
+                              sliderName.startsWith('prod') ? `prodGallery${sliderName.replace('prod', '')}` : 'factoryGallery';
+            
+            const container = document.getElementById(containerId);
+            if (!container) return;
+            const slides = container.querySelectorAll('.slider-img');
+            if (!slides.length) return;
+
+            slides[state.current].classList.remove('active');
+            state.current = (state.current + direction + slides.length) % slides.length;
+            slides[state.current].classList.add('active');
+        }
+
+        // CMS Photo / Asset Handlers
+        function addPhotoToSlideshow() {
+            const fileInput = document.getElementById('cmsPhotoFileInput');
+            const urlInput = document.getElementById('cmsPhotoUrlInput');
+            if (fileInput.files && fileInput.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    siteData.photos.unshift(e.target.result);
+                    fileInput.value = '';
+                    renderCMSPhotoList();
+                };
+                reader.readAsDataURL(fileInput.files[0]);
+            } else if (urlInput.value.trim()) {
+                siteData.photos.unshift(urlInput.value.trim());
+                urlInput.value = '';
+                renderCMSPhotoList();
+            } else {
+                alert('Please select a file or paste a URL!');
+            }
+        }
+
+        function removePhoto(idx) {
+            siteData.photos.splice(idx, 1);
+            renderCMSPhotoList();
+        }
+
+        function renderCMSPhotoList() {
+            const list = document.getElementById('cmsPhotoList');
+            list.innerHTML = '';
+            siteData.photos.forEach((src, idx) => {
+                list.innerHTML += `
+                    <div class="relative group border rounded overflow-hidden h-20 bg-stone-100">
+                        <img src="${src}" class="w-full h-full object-cover">
+                        <button onclick="removePhoto(${idx})" class="absolute top-1 right-1 bg-red-600 text-white rounded-full w-5 h-5 text-[10px] flex items-center justify-center">&times;</button>
+                    </div>
+                `;
+            });
+        }
+
+        function addFactoryPhoto() {
+            const fileInput = document.getElementById('cmsFactoryFileInput');
+            const urlInput = document.getElementById('cmsFactoryUrlInput');
+            if (fileInput.files && fileInput.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    siteData.factoryPhotos.unshift(e.target.result);
+                    fileInput.value = '';
+                    renderCMSFactoryPhotoList();
+                };
+                reader.readAsDataURL(fileInput.files[0]);
+            } else if (urlInput.value.trim()) {
+                siteData.factoryPhotos.unshift(urlInput.value.trim());
+                urlInput.value = '';
+                renderCMSFactoryPhotoList();
+            } else {
+                alert('Please select a file or paste a URL!');
+            }
+        }
+
+        function removeFactoryPhoto(idx) {
+            siteData.factoryPhotos.splice(idx, 1);
+            renderCMSFactoryPhotoList();
+        }
+
+        function renderCMSFactoryPhotoList() {
+            const list = document.getElementById('cmsFactoryPhotoList');
+            list.innerHTML = '';
+            siteData.factoryPhotos.forEach((src, idx) => {
+                list.innerHTML += `
+                    <div class="relative group border rounded overflow-hidden h-20 bg-stone-100">
+                        <img src="${src}" class="w-full h-full object-cover">
+                        <button onclick="removeFactoryPhoto(${idx})" class="absolute top-1 right-1 bg-red-600 text-white rounded-full w-5 h-5 text-[10px] flex items-center justify-center">&times;</button>
+                    </div>
+                `;
+            });
+        }
+
+        function addProductSlide(cardNum) {
+            const fileInput = document.getElementById(`cmsProdFile${cardNum}`);
+            const urlInput = document.getElementById(`cmsProdUrl${cardNum}`);
+            const prodObj = siteData.products[cardNum - 1];
+
+            if (fileInput.files && fileInput.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    prodObj.photos.unshift(e.target.result);
+                    fileInput.value = '';
+                    alert(`Photo added to Craftsmanship Portfolio Card ${cardNum}!`);
+                };
+                reader.readAsDataURL(fileInput.files[0]);
+            } else if (urlInput.value.trim()) {
+                prodObj.photos.unshift(urlInput.value.trim());
+                urlInput.value = '';
+                alert(`Photo added to Craftsmanship Portfolio Card ${cardNum}!`);
+            } else {
+                alert('Please select a file or paste a URL!');
+            }
+        }
+
+        function toggleMobileMenu() {
+            document.getElementById('mobileMenu').classList.toggle('hidden');
+        }
+
+        function updateDoorPreview() {
+            const shutter = document.getElementById('custShutterType').value;
+            const frame = document.getElementById('custFrameWood').value;
+            const bulkSelect = document.getElementById('custBulkQuantity').value;
+            const customQty = document.getElementById('custCustomQty').value;
+            let qtyDisplay = bulkSelect === 'custom' && customQty ? `${customQty} Doors` : bulkSelect;
+
+            const leaf = document.getElementById('previewLeaf');
+            const frameElem = document.getElementById('previewFrame');
+            const icon = document.getElementById('panelIcon');
+            const summary = document.getElementById('specSummary');
+
+            if (shutter.includes('teak')) leaf.style.backgroundColor = '#7e5a34';
+            else if (shutter.includes('walnut')) leaf.style.backgroundColor = '#422a1d';
+            else if (shutter.includes('oak')) leaf.style.backgroundColor = '#9b7641';
+            else leaf.style.backgroundColor = '#543b2a';
+
+            if (frame === 'teak') frameElem.style.borderColor = '#7e5a34';
+            else if (frame === 'meranti') frameElem.style.borderColor = '#913e2d';
+            else frameElem.style.borderColor = '#543b2a';
+
+            summary.innerText = `Selected: ${shutter.toUpperCase().replace('-', ' ')} with ${frame.toUpperCase()} Frame | Quantity: ${qtyDisplay}`;
+        }
+
+        function swingDoor(angle) {
+            document.getElementById('previewLeaf').style.transform = `rotateY(-${angle}deg)`;
+            document.getElementById('swingAngleLabel').innerText = angle > 0 ? `Open (${angle}°)` : `Closed (0°)`;
+        }
+
+        function setHardware(type) {
+            const handle = document.getElementById('handleColor');
+            if (type === 'brass') handle.style.backgroundColor = '#d4af37';
+            else if (type === 'chrome') handle.style.backgroundColor = '#e2e8f0';
+            else handle.style.backgroundColor = '#1e293b';
+        }
+
+        function requestCustomizerQuote() {
+            const shutter = document.getElementById('custShutterType').value;
+            const frame = document.getElementById('custFrameWood').value;
+            const bulkSelect = document.getElementById('custBulkQuantity').value;
+            const customQty = document.getElementById('custCustomQty').value;
+            let qtyDisplay = bulkSelect === 'custom' && customQty ? `${customQty} Doors` : bulkSelect;
+            const text = encodeURIComponent(`Hello Elite Infra Products, I would like a bulk order quote for:\n- Shutter Type: ${shutter}\n- Wood Frame: ${frame}\n- Required Quantity: ${qtyDisplay}`);
+            window.open(`https://wa.me/919100009781?text=${text}`, '_blank');
+        }
+
+        function toggleAIChat() {
+            document.getElementById('aiChatCard').classList.toggle('hidden');
+        }
+
+        function handleAIPress(e) {
+            if (e.key === 'Enter') sendAIMessage();
+        }
+
+        function sendAIMessage() {
+            const input = document.getElementById('aiChatInput');
+            const messages = document.getElementById('aiChatMessages');
+            const userMsg = input.value.trim();
+            if (!userMsg) return;
+
+            messages.innerHTML += `<div class="bg-gold-500 text-stone-950 p-3 rounded-xl max-w-[85%] ml-auto font-medium">${userMsg}</div>`;
+            input.value = '';
+
+            setTimeout(() => {
+                let reply = "Elite Infra Products manufactures pre-hung door sets, teak carved shutters, and engineered frames in Sultanpur, Hyderabad. Call +91 9100009781 for bulk project quotes!";
+                messages.innerHTML += `<div class="bg-wood-900 text-stone-100 p-3 rounded-xl max-w-[85%] border border-wood-800">${reply}</div>`;
+                messages.scrollTop = messages.scrollHeight;
+            }, 600);
+        }
+
+        function openLoginModal() { document.getElementById('adminModal').classList.remove('hidden'); }
+        function closeLoginModal() { document.getElementById('adminModal').classList.add('hidden'); }
+
+        function verifyLogin() {
+            const pass = document.getElementById('adminPass').value;
+            if (pass === 'Eliteinfra0623') {
+                document.getElementById('loginError').classList.add('hidden');
+                document.getElementById('adminLoginForm').classList.add('hidden');
+                document.getElementById('adminPanelContent').classList.remove('hidden');
+                loadCMSFields();
+            } else {
+                document.getElementById('loginError').classList.remove('hidden');
+            }
+        }
+
+        function loadCMSFields() {
+            document.getElementById('cmsBgColor').value = siteData.bgTone;
+            document.getElementById('cmsHeroSub').value = siteData.heroSub;
+            document.getElementById('cmsHeroTitle').value = siteData.heroTitle;
+            document.getElementById('cmsHeroTagline').value = siteData.heroTagline;
+            document.getElementById('cmsAboutBadge').value = siteData.aboutBadge;
+            document.getElementById('cmsAboutTitle').value = siteData.aboutTitle;
+            document.getElementById('cmsAboutBio').value = siteData.aboutBio;
+            document.getElementById('cmsPhone').value = siteData.phone;
+            document.getElementById('cmsEmail').value = siteData.email;
+
+            for (let i = 0; i < 3; i++) {
+                document.getElementById(`cmsProdTitle${i+1}`).value = siteData.products[i].title;
+                document.getElementById(`cmsProdDesc${i+1}`).value = siteData.products[i].desc;
+            }
+
+            renderCMSPhotoList();
+            renderCMSFactoryPhotoList();
+
+            const clientContainer = document.getElementById('cmsClientInputs');
+            clientContainer.innerHTML = '';
+            siteData.clients.forEach((client) => {
+                clientContainer.innerHTML += `
+                    <div class="flex items-center space-x-1">
+                        <input type="text" value="${client}" class="cms-client-item w-full bg-white border border-wood-300 rounded px-2 py-1 text-xs text-stone-800">
+                        <button onclick="this.parentElement.remove()" class="text-red-500 p-1 hover:text-red-700"><i class="fa-solid fa-trash"></i></button>
+                    </div>
+                `;
+            });
+        }
+
+        function addNewClientField() {
+            document.getElementById('cmsClientInputs').innerHTML += `
+                <div class="flex items-center space-x-1">
+                    <input type="text" placeholder="New Developer Name" class="cms-client-item w-full bg-white border border-wood-300 rounded px-2 py-1 text-xs text-stone-800">
+                    <button onclick="this.parentElement.remove()" class="text-red-500 p-1 hover:text-red-700"><i class="fa-solid fa-trash"></i></button>
+                </div>
+            `;
+        }
+
+        function saveCMSChanges() {
+            siteData.heroSub = document.getElementById('cmsHeroSub').value;
+            siteData.heroTitle = document.getElementById('cmsHeroTitle').value;
+            siteData.heroTagline = document.getElementById('cmsHeroTagline').value;
+            siteData.aboutBadge = document.getElementById('cmsAboutBadge').value;
+            siteData.aboutTitle = document.getElementById('cmsAboutTitle').value;
+            siteData.aboutBio = document.getElementById('cmsAboutBio').value;
+            siteData.phone = document.getElementById('cmsPhone').value;
+            siteData.email = document.getElementById('cmsEmail').value;
+
+            for (let i = 0; i < 3; i++) {
+                siteData.products[i].title = document.getElementById(`cmsProdTitle${i+1}`).value;
+                siteData.products[i].desc = document.getElementById(`cmsProdDesc${i+1}`).value;
+            }
+
+            const logoFileInput = document.getElementById('cmsLogoFileInput');
+            if (logoFileInput.files && logoFileInput.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    siteData.logoUrl = e.target.result;
+                    finalizeSaveCMS();
+                };
+                reader.readAsDataURL(logoFileInput.files[0]);
+            } else {
+                finalizeSaveCMS();
+            }
+        }
+
+        function finalizeSaveCMS() {
+            const clientInputs = document.querySelectorAll('.cms-client-item');
+            const updatedClients = [];
+            clientInputs.forEach(input => {
+                if (input.value.trim()) updatedClients.push(input.value.trim());
+            });
+            siteData.clients = updatedClients;
+
+            localStorage.setItem('elite_bg_tone', siteData.bgTone);
+            localStorage.setItem('elite_hero_sub', siteData.heroSub);
+            localStorage.setItem('elite_hero_title', siteData.heroTitle);
+            localStorage.setItem('elite_hero_tagline', siteData.heroTagline);
+            localStorage.setItem('elite_about_badge', siteData.aboutBadge);
+            localStorage.setItem('elite_about_title', siteData.aboutTitle);
+            localStorage.setItem('elite_about', siteData.aboutBio);
+            localStorage.setItem('elite_photos', JSON.stringify(siteData.photos));
+            localStorage.setItem('elite_factory_photos', JSON.stringify(siteData.factoryPhotos));
+            localStorage.setItem('elite_products', JSON.stringify(siteData.products));
+            localStorage.setItem('elite_logo', siteData.logoUrl);
+            localStorage.setItem('elite_phone', siteData.phone);
+            localStorage.setItem('elite_email', siteData.email);
+            localStorage.setItem('elite_clients', JSON.stringify(siteData.clients));
+
+            applySiteData();
+            closeLoginModal();
+            alert('Site content updated successfully!');
+        }
+
+        function resetCMSDefaults() {
+            if (confirm('Are you sure you want to reset all content to factory defaults?')) {
+                localStorage.clear();
+                location.reload();
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            applySiteData();
+            updateDoorPreview();
+        });
+    </script>
+</body>
+</html>
